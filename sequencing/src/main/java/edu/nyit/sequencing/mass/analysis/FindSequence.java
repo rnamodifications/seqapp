@@ -554,7 +554,7 @@ public class FindSequence {
     public void testImage() {
         try {
             System.out.println("Start to generate image!");
-            Process p = Runtime.getRuntime().exec("python resultFiles/plot_mass.py");
+            Process p = Runtime.getRuntime().exec("python webapps/plot_mass.py");
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Failed to generate image!");
@@ -567,10 +567,7 @@ public class FindSequence {
         //Please note that a valid MFE data file in txt format with full file path is required
         //here to make the program run.
 
-        String fileName = "D://seq_app_src/MFE_data/190329s07_RT25_47_Mass_TableS8-9.txt";
-
-
-
+        String fileName = "data/input_data/1114s05_3forms_TableS1-3.txt";
 
         fs.mass_data.addAll(fs.loadData(fileName));
 

@@ -1,11 +1,13 @@
 package edu.nyit.sequencing.mass.analysis.model;
 
+import edu.nyit.sequencing.mass.analysis.MassLoader;
 import edu.nyit.sequencing.mass.analysis.model.AnchorNode;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,18 +26,13 @@ public class AnchorLoader {
 
     public void loadData(){
 
-        //This is the file path for anchor_bank.csv if you run the
-        //sequencing program in Java IDE from local machine.
+        //This is the file path for anchor_bank.csv
 
-        //String fileName = "D://seq_app_src/data/anchor_bank.csv";
-
-        //This is the file path for anchor_bank.csv if you want to run the
-        //sequencing program from the web interface.
-
-        String fileName = "data/anchor_bank.csv";
+        String fileName = "config/anchor_bank.csv";
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader(new File(fileName)));
+        	URL resource = AnchorLoader.class.getClassLoader().getResource(fileName);
+            BufferedReader br = new BufferedReader(new FileReader(new File(resource.getFile())));
             String line = null;
 
             while((line = br.readLine())!= null){

@@ -24,18 +24,11 @@ public class ResultGenerator {
     List<DraftRead> finalReads;
 
 
-    //This is the file path to output the sequencing result if you want to run the
-    //sequencing program in Java IDE from local machine.
-
-    //public static final String directory = "D://seq_app_src/result/";
-    //public static final String fasta_directory = "D://seq_app_src/fasta_result/";
-
-
-    //This is the file path output the sequencing result if you want to run the
-    //sequencing program from the web interface.
-
-    public static final String directory = "resultFiles/result/";
-    public static final String fasta_directory = "resultFiles/fasta_result/";
+    //This is the file path to output the sequencing result 
+    
+    public static final String directory = "Result/";
+    
+    public static final String fasta_directory = "fastaResult/";
 
 
     public ResultGenerator() {
@@ -51,7 +44,10 @@ public class ResultGenerator {
         double target_mass1 = anchor.getMass();
 
         File folder = new File(directory);
-
+        if (!folder.exists()) {
+        	folder.mkdir();
+        }
+        
         for(File f: folder.listFiles()) {
             f.delete();
         }
@@ -60,7 +56,10 @@ public class ResultGenerator {
         //previous data analysis, added 6/3/2019
 
         File fasta_folder = new File(fasta_directory);
-
+        if (!fasta_folder.exists()) {
+        	fasta_folder.mkdir();
+        }
+        
         for(File f1: fasta_folder.listFiles()) {
             f1.delete();
         }

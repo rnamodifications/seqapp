@@ -33,7 +33,8 @@ public class SequencingService {
 
     /** The path to the folder where we want to store the uploaded files */
     private static final String UPLOAD_FOLDER = "uploadedFiles/";
-    private static final String RESULT_PLOT = "resultFiles/";
+    private static final String RESULT_PLOT = "Result/";
+    private static final String FASTA_RESULT = "fastaResult/";
 
     public SequencingService() {}
 
@@ -58,6 +59,8 @@ public class SequencingService {
         // create our destination folder, if it not exists
         try {
             createFolderIfNotExists(UPLOAD_FOLDER);
+            createFolderIfNotExists(RESULT_PLOT);
+            createFolderIfNotExists(FASTA_RESULT);
         } catch (SecurityException se) {
             return Response.status(500).entity("Can not create destination folder on server").build();
         }
@@ -110,21 +113,34 @@ public class SequencingService {
     private void saveToFile(InputStream inStream, String target) throws IOException {
         OutputStream out = null;
         OutputStream out1 = null;
+        
+        String lcmsFile = UPLOAD_FOLDER + "LCMS_data.txt";
 
         int read = 0;
         byte[] bytes = new byte[1024];
+        
         System.out.println("Target path: "+target);
+        
+        System.out.println("LC-MS path: "+ lcmsFile);
+        
+        // create our destination folder, if it not exists
+//        try {
+//            createFolderIfNotExists("resultFiles/data/");
+//        } catch (SecurityException se) {
+//            throw se;
+//        }
 
         out = new FileOutputStream(new File(target));
-        out1 = new FileOutputStream(new File("resultFiles/data/LCMS_data.txt"));
+        out1 = new FileOutputStream(new File(lcmsFile));
 
         while ((read = inStream.read(bytes)) != -1) {
             out.write(bytes, 0, read);
-            out1.write(bytes,0, read);
+            out1.write(bytes, 0, read);
         }
+        
         out.flush();
         out.close();
-
+        
         out1.flush();
         out1.close();
     }
