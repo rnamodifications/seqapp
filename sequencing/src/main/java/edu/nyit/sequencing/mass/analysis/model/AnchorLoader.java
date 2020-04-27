@@ -31,8 +31,8 @@ public class AnchorLoader {
         String fileName = "config/anchor_bank.csv";
 
         try {
-        	URL resource = AnchorLoader.class.getClassLoader().getResource(fileName);
-            BufferedReader br = new BufferedReader(new FileReader(new File(resource.getFile())));
+        	//URL resource = AnchorLoader.class.getClassLoader().getResource(fileName);
+            BufferedReader br = new BufferedReader(new FileReader(new File(fileName)));
             String line = null;
 
             while((line = br.readLine())!= null){

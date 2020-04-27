@@ -411,7 +411,7 @@ public class ResultGenerator {
                 }
 
             }
-            else if ((target_mass1 == 692.1105 || target_mass1 == 922.2269) && draftRead.getLength() == maxReadLength){
+            else if ((target_mass1 == 692.1105 || target_mass1 == 922.2269 || target_mass1 == 612.1442) && draftRead.getLength() == maxReadLength){
                 sizeMap.put(String.valueOf(draftRead.getLength()), sizeMap.getOrDefault(String.valueOf(draftRead.getLength()), 0) + 1);
 
                 String fname = "Length_" + String.valueOf(draftRead.getLength()) + "_AvgVolume_" + draftRead.getAverageVolume() + "_#" + String.valueOf(sizeMap.get(String.valueOf(draftRead.getLength()))) + ".txt";
@@ -434,7 +434,7 @@ public class ResultGenerator {
                     else if(target_mass1 == 938.2216){
                         bw.write(String.format("%8s","1") + "\t" + String.format("%10s",String.format( "%.4f", draftRead.getHead().mass_value)) + "\t\t" + String.format("%6s", String.format( "%.3f", draftRead.getHead().retention_time)) +"\tTag+G\t"+ String.format("%9s",draftRead.getHead().volume) + "\t" +String.format( "%.2f", draftRead.getHead().getPPM()) + "\n");
                     }
-                    else if(target_mass1 == 692.1105){
+                    else if(target_mass1 == 692.1105 || target_mass1 == 612.1442){
                         bw.write(String.format("%8s","1") + "\t" + String.format("%10s",String.format( "%.4f", draftRead.getHead().mass_value)) + "\t\t" + String.format("%6s", String.format( "%.3f", draftRead.getHead().retention_time)) +"\tA+G\t\t"+ String.format("%9s",draftRead.getHead().volume) + "\t" + String.format( "%.2f", draftRead.getHead().getPPM()) + "\n");
                     }
                     else if(target_mass1 == 877.1793){
@@ -446,10 +446,13 @@ public class ResultGenerator {
                     else if(target_mass1 == 694.2397){
                         bw.write(String.format("%8s","1") + "\t" + String.format("%10s",String.format( "%.4f", draftRead.getHead().mass_value)) + "\t\t" + String.format("%6s", String.format( "%.3f", draftRead.getHead().retention_time)) + "\t3'Tag\t" + String.format("%9s",draftRead.getHead().volume) + "\t" + String.format( "%.2f", draftRead.getHead().getPPM()) + "\n");
                     }
+                    else {
+                    	bw.write(String.format("%8s","1") + "\t" + String.format("%10s",String.format( "%.4f", draftRead.getHead().mass_value)) + "\t\t" + String.format("%6s", String.format( "%.3f", draftRead.getHead().retention_time)) + "\t" + anchor.getName() + "\t" + String.format("%9s",draftRead.getHead().volume) + "\t" + String.format( "%.2f", draftRead.getHead().getPPM()) + "\n");
+                    }
 
                     for (int i = 0; i < draftRead.getComponent().size(); i++) {
 
-                        if(draftRead.getComponent().get(i).base.endsWith("end") || draftRead.getComponent().get(i).base.equals("U+Cm") || draftRead.getComponent().get(i).base.equals("A+Gm")){
+                        if(draftRead.getComponent().get(i).base.endsWith("end") || draftRead.getComponent().get(i).base.equals("U+Cm") || draftRead.getComponent().get(i).base.equals("A+Gm") || draftRead.getComponent().get(i).base.equals("ModPsi")){
                             bw.write(String.format("%8s", (i + 2)) + "\t" + String.format("%10s", String.format("%.4f", draftRead.getComponent().get(i).node.mass_value)) + "\t\t" + String.format("%6s", String.format("%.3f", draftRead.getComponent().get(i).node.retention_time)) + "\t" + draftRead.getComponent().get(i).base + "\t" + String.format("%9s", draftRead.getComponent().get(i).node.volume) + "\t" + String.format("%.2f", draftRead.getComponent().get(i).ppm) + "\n");
                         }else {
                             bw.write(String.format("%8s", (i + 2)) + "\t" + String.format("%10s", String.format("%.4f", draftRead.getComponent().get(i).node.mass_value)) + "\t\t" + String.format("%6s", String.format("%.3f", draftRead.getComponent().get(i).node.retention_time)) + "\t" + draftRead.getComponent().get(i).base + "\t\t" + String.format("%9s", draftRead.getComponent().get(i).node.volume) + "\t" + String.format("%.2f", draftRead.getComponent().get(i).ppm) + "\n");
@@ -576,7 +579,7 @@ public class ResultGenerator {
                         else if(target_mass1 == 938.2216){
                             bw.write(draftRead.getHead().mass_value+"\t"+draftRead.getHead().retention_time +"\tTag+G\t"+ draftRead.getHead().volume + "\n");
                         }
-                        else if(target_mass1 == 692.1105){
+                        else if(target_mass1 == 692.1105 || target_mass1 == 612.1442){
                             bw.write(draftRead.getHead().mass_value+"\t"+draftRead.getHead().retention_time +"\tA+G\t"+ draftRead.getHead().volume + "\n");
                         }
                         else if(target_mass1 == 877.1793){
@@ -585,11 +588,14 @@ public class ResultGenerator {
                         else if(target_mass1 == 1225.3243 || target_mass1 == 6398.1021){
                             bw.write(draftRead.getHead().mass_value+"\t"+draftRead.getHead().retention_time +"\tCMC-Psi\t"+ draftRead.getHead().volume + "\n");
                         }
-                        else if(target_mass1 == 668.0992){
+                        else if(target_mass1 == 668.0992 || target_mass1 == 668.0993){
                             bw.write(draftRead.getHead().mass_value+"\t"+draftRead.getHead().retention_time +"\tG+C\t"+ draftRead.getHead().volume + "\n");
                         }
                         else if(target_mass1 == 694.2397){
                             bw.write(draftRead.getHead().mass_value+"\t"+draftRead.getHead().retention_time +"\t3'Tag\t"+ draftRead.getHead().volume + "\n");
+                        }
+                        else {
+                        	bw.write(draftRead.getHead().mass_value+"\t"+draftRead.getHead().retention_time +"\t" + anchor.getName() + "\t"+ draftRead.getHead().volume + "\n");
                         }
 
                         for (int i = 0; i < draftRead.getComponent().size(); i++) {
@@ -632,7 +638,7 @@ public class ResultGenerator {
                         else if(target_mass1 == 1225.3243 || target_mass1 == 6398.1021){
                             bw.write(String.format("%8s","1") + "\t" + String.format("%10s",String.format( "%.4f", draftRead.getHead().mass_value)) + "\t\t" + String.format("%6s", String.format( "%.3f", draftRead.getHead().retention_time)) +"\tMod-Psi\t"+ String.format("%9s",draftRead.getHead().volume) + "\t" + String.format( "%.2f", draftRead.getHead().getPPM()) + "\n");
                         }
-                        else if(target_mass1 == 668.0992){
+                        else if(target_mass1 == 668.0992 || target_mass1 == 668.0993){
                             bw.write(String.format("%8s","1") + "\t" + String.format("%10s",String.format( "%.4f", draftRead.getHead().mass_value)) + "\t\t" + String.format("%6s", String.format( "%.3f", draftRead.getHead().retention_time)) +"\tG+C\t\t"+ String.format("%9s",draftRead.getHead().volume) + "\t" + String.format( "%.2f", draftRead.getHead().getPPM()) + "\n");
                         }
                         else if(target_mass1 == 694.2397){
@@ -860,6 +866,10 @@ public class ResultGenerator {
 
                     if(anchor_mass == 922.2269 && seq.get(i).base.equals("mA")){
                         addDraftRead = false;
+                    }
+                    
+                    if(seq.get(i).base.endsWith("-end")) {
+                    	addDraftRead = false;
                     }
 
                 }

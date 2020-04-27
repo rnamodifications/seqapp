@@ -30,15 +30,16 @@ public class MassLoader {
         String fileName = "config/base_bank.csv";
 
         try {
-        	URL resource = MassLoader.class.getClassLoader().getResource(fileName);
-            BufferedReader br = new BufferedReader(new FileReader(new File(resource.getFile())));
-            String line = null;
+        	
+           BufferedReader br = new BufferedReader(new FileReader(new File(fileName)));
+        	
+           String line = null;
          
-            while((line = br.readLine())!= null){
+           while((line = br.readLine())!= null){
                 String[] splitArray =line.replace("\n", "").split("\t");
                 MassNode massNode = new MassNode(Double.parseDouble(splitArray[1]), splitArray[0]);
                 this.massNodes.add(massNode);
-            }
+           }
             
             
         } catch (IOException e) {

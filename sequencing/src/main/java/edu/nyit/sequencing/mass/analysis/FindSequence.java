@@ -450,13 +450,13 @@ public class FindSequence {
                 //allow draft sequence with short read length
                 //revised 7/11/2019
 
-                if(this.anchor_mass == 1225.3243 || this.anchor_mass == 6398.1021 || this.anchor_mass == 668.0992 || this.anchor_mass == 877.1793) {
+                if(this.anchor_mass == 1225.3243 || this.anchor_mass == 6398.1021 || this.anchor_mass == 4348.7897 || this.anchor_mass == 668.0992 || this.anchor_mass == 877.1793) {
 
                     if (r.size() >= 4) {//try to limit the output sequence amount
                         treeNode.seq_list.add(r);
                     }
                 }
-                else if(this.anchor.getMass() == 443.0243 || this.anchor.getMass() == 938.2216){
+                else if(this.anchor.getMass() == 443.0243 || this.anchor.getMass() == 938.2216 || this.anchor_mass == 668.0993){
 
                     if (r.size() >= 17) {//try to limit the output sequence amount
                         treeNode.seq_list.add(r);
@@ -487,6 +487,9 @@ public class FindSequence {
         }
         else if (this.anchor_mass == 877.1793){
             rg.generateResult(this.mass_data, this.anchor, 40000);
+        }
+        else if (this.anchor_mass == 612.1442){
+            rg.generateResult(this.mass_data, this.anchor, 5);
         }
         else if(this.anchor_mass == -1.0){
             System.out.println("Could not find any anchor node in the MFE Data. STOP HERE!");
@@ -567,7 +570,7 @@ public class FindSequence {
         //Please note that a valid MFE data file in txt format with full file path is required
         //here to make the program run.
 
-        String fileName = "data/input_data/1114s05_3forms_TableS1-3.txt";
+        String fileName = "data/input_data/TableS1-3_111418s05_3forms.txt";
 
         fs.mass_data.addAll(fs.loadData(fileName));
 
