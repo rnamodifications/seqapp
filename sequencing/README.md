@@ -54,6 +54,8 @@ mvn package
 cp target/sequencing-0.0.1-SNAPSHOT.war jetty-distribution-9.4.28.v20200408/webapps/
 cp seq_web_app/sequencing_app.html jetty-distribution-9.4.28.v20200408/webapps/
 cp seq_web_app/plot_mass.py  jetty-distribution-9.4.28.v20200408/webapps/
+mkdir jetty-distribution-9.4.28.v20200408/config/
+cp config/* jetty-distribution-9.4.28.v20200408/config/
 ```
 
 
@@ -76,14 +78,14 @@ click the "Run" button or menu item to run the whole software.
 ### Usage of This Software in Web Interface
 
 1. To run the software from web interface, you should first ensure that the `sequencing-0.0.1-SNAPSHOT.war`
-file is located at `jetty-distribution-9.4.28.v20200408/webapps/` directory. Then run the following commands.
+file is located at `jetty-distribution-9.4.28.v20200408/webapps` directory. Then run the following commands.
 
 ```bash
 cd jetty-distribution-9.4.28.v20200408
 java -jar start.jar
 ```
 
-2. Set the anchor with the `anchor_bank.csv` which is located at `src/main/resources/config`. Please specify 
+2. Set the anchor with the `anchor_bank.csv` which is located at `jetty-distribution-9.4.28.v20200408/config` directory. Please specify 
 only one anchor at each time, in order to achieve the best reading accuracy. 
 
 3. Open web-based sequencing app which is located at `jetty-distribution-9.4.28.v20200408/webapps/sequencing_app.html`.
@@ -95,10 +97,10 @@ directories. The result can also be visualized as a RT-Mass plot in the web inte
 
 ### Parameters
 
-`<anchor_bank.csv>`: The anchor dataset filename which is located at `src/main/resources/config/` directory
+`<anchor_bank.csv>`: The anchor dataset filename which is located at `config` directory
 	Filename of a list of anchor in the format of `AnchorName<TabSpace>AnchorMass`
 
-`<base_bank.csv>`: The base and modification dataset filename which is located at `src/main/resources/config/` directory
+`<base_bank.csv>`: The base and modification dataset filename which is located at `config` directory
 	Filename of a list of bases and their known modifications in the format of `BaseName<TabSpace>BaseMass`
 
 `<directory>`: The directory to output the result for final sequence reads
